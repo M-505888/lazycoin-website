@@ -4,7 +4,7 @@
 // Constants
 const ASSET_ID = '6p5Ej1f3G8DT7bjL6iW2Uqnhh5pRfzgPof9iCkf6BAGS';
 const BAGS_API_BASE = 'https://public-api-v2.bags.fm/api/v1/assets';
-const API_KEY = 'YOUR_API_KEY_HERE'; // Do not commit this!
+
 
 // State
 let currentPrice = 0.0024; // Default fallback
@@ -29,17 +29,14 @@ async function init() {
 
 async function fetchTokenData() {
     try {
-        console.log("Fetching data with laziness...");
-        const response = await fetch(`${BAGS_API_BASE}/${ASSET_ID}`, {
-            headers: {
-                'x-api-key': API_KEY
-            }
-        });
+        console.log("Fetching data via secure lazy proxy...");
+        // Fetch from our own Vercel function (no key needed on frontend)
+        const response = await fetch('/api/proxy');
 
         if (!response.ok) throw new Error(`Failed to fetch: ${response.status}`);
 
         const data = await response.json();
-        console.log("Data acquired:", data);
+        console.log("Data acquired securely:", data);
 
         // Update price if available
         if (data.price) {
@@ -49,7 +46,7 @@ async function fetchTokenData() {
         updateCalculator();
 
     } catch (error) {
-        console.error('Too lazy to fetch data (or API error):', error);
+        console.error('Too lazy to fetch data (or Proxy error):', error);
     }
 }
 

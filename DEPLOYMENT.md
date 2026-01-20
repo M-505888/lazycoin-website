@@ -31,6 +31,11 @@ git push -u origin main
     - **Framework Preset**: select "Other" (or leave it as is, Vercel detects HTML).
     - **Build Command**: Leave empty.
     - **Output Directory**: Leave empty (root).
-6.  Click **"Deploy"**.
+6.  **Environment Variables**:
+    - Go to **Settings** -> **Environment Variables**.
+    - Add Key: `BAGS_API_KEY`
+    - Add Value: `YOUR_ACTUAL_API_KEY_STARTING_WITH_bags_prod`
+    - Save.
+7.  Click **"Deploy"** (or Redeploy if you already did).
 
 That's it. It will be live in seconds.
